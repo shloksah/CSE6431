@@ -1,18 +1,28 @@
 import socket
+import time
+class client:
 
-HOST = '127.0.0.1'
-PORT = 1234
+    def run(self,ops,timer):
+        HOST = '127.0.0.1'
+        PORT = 1234
+        print('Hello client here!')
+        client_socket = socket.socket()
+        client_socket.connect((HOST, PORT))
+        for i in ops:
+            timer+=1
+            self.helper(i+str(timer),client_socket)
+        client_socket.close()
+        return
 
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect((HOST, PORT))
+    def helper(self,data,client_socket):
 
-while True:
-    data = input('Send message: ')
 
-    client_socket.send(data.encode())
-    response = (client_socket.recv(1024)).decode()
-
-    print('Server response: {}'.format(response))
-
-    if data == 'stop':
-        break
+            #while True:
+            #data = input('Send message to server: ')
+            client_socket.send(data.encode())
+            response = (client_socket.recv(1024)).decode()
+            print('Server response: {}'.format(response))
+            #client_socket.close()
+                #if data == 'stop':
+                    #break
+            return

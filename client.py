@@ -11,7 +11,8 @@ port = 12345
 s.connect(('127.0.0.1', port))
 
 while True:
-
+    data = input('Send message: ')
+    s.send(data.encode())
     # receive data from the server and decoding to get the string.
     print (s.recv(1024).decode())
     ans = input('\nDo you want to continue(y/n) :')
